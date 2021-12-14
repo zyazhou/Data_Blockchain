@@ -1,0 +1,63 @@
+.left{
+	border-right:2px solid #eeeeee;
+}
+.left a{
+	font-weight:bold;
+	color:#000;
+}
+
+@media(min-width:992px){
+	.left{
+		height:100vh;
+	}
+}/* 大屏设备，屏幕宽度大于992px，导航高度为100vh*/
+
+@media (max-width:768px){
+    .left{
+        margin:1rem 0;
+    }
+}/* 小屏设备，小于768px,上下外边距为1rem，左右为0rem,页面根字体的大小为14px*/
+
+@media (min-width:768px){
+    .left{
+        position:fixed;
+        top:0;
+        left:0;
+    }
+	.margin1{
+		margin-top:40vh; 设置位置
+	}
+}/*大屏，左侧固定，右侧左外边距为25% */
+
+.margin2 h6{
+	margin:20px 0;
+	font-weight:bold;
+}
+
+.max-h{
+	max-height: 300px;
+}
+
+.list{
+	background: #eeeeee;
+}
+.list-border{
+	border: 2px solid #DBDBDB;
+	border-top: 1px solid #DBDBDB;
+}
+.log{
+width:408.8px ;
+height:158.8px;
+}
+
+.ab{
+	color: #00A862!important;
+}
+#myTab  li{
+	width: 26vw;
+	min-width: 22px;
+	font-size: 0.6rem;
+	color: #919191;
+	display:inline-block; /* 横向摆放*/
+}
+

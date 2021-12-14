@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!--设定页面使用的字符集-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!--添加响应式的视图标签-->
+		<title>网页2.0</title>
+
+		<link rel="stylesheet" href="../static/bootstrap-4.2.1-dist/css/bootstrap.css">
+		<!--引入bootstrap基本样式-->
+
+		<script src="../static/js/jquery-3.3.1.js"></script>
+		<script src="../static/js/popper.js"></script>
+		<script src="../static/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
+		<script src="../static/js/vue.js"></script>
+		<script src="../static/js/axios.min.js"></script>
+		
+		<!--引入自定义样式-->
+		<link rel="stylesheet" href="../static/css/style.css">
+		<script src="../static/js/index.js"></script>
+
+		<link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.css">
+		<!--字体图标文件-->
+	</head>
+	<body>
+
+		<!--  <p>爬虫文章+词云分析</p> -->
+		<div class="row">
+			<!-- 下面是左侧导航内容-->
+			<div class="col-sm-12 col-lg-3 left " id="app1">
+					<!-- 导航展示内容，id=templatel是实际的，template2是隐藏的，使用<ul class="nav">定义导航组件，
+					 用<a href="#" class="btn">定义按钮，放在<div class="d-none d-sm-block">中，如果是小屏，就会隐藏 -->
+				<div id="template1">
+					<div class="row">
+							
+						<div class="col-10"><!--导航条 -->
+							<ul class="nav">
+								    <!--图标 -->
+								<li class="nav-item">
+									<a class="nav-link active" href="index.html"> 
+										<img width="40" src="../static/images/黄昏航海.jpg" alt="" class="rounded-circle">
+									</a>
+								</li>
+								
+								<li class="nav-item mt-1">
+									<a class="nav-link" href="javascript:void(0);">个人信息</a>
+								</li>
+								<li class="nav-item mt-1">
+									<a class="nav-link" href="javascript:void(0);">菜单</a>
+								</li>
+							</ul>
+						</div>
+						
+						<div class="col-2 mt-2 font-menu text-right">
+							<a id="a1" href="javascript:void(0);"> <i class="fa fa-bars"></i> </a>
+						</div>
+					</div>
+					
+					<!--下面是未登录页面-->
+					<div class="margin1 " id='login_1'>
+						<h5 class="ml-3 my-3 d-none d-sm-block text-lg-center">
+							<b>今天也要记得开心哦</b>&nbsp;&nbsp;<i class="fa fa-coffee"></i>
+						</h5>
+						<div class="ml-3 my-3 d-none d-sm-block text-lg-center">
+							<a id='user_login' href="javascript:void(0);" class="card-link  btn  rounded-pill  text-success">
+								<i class="fa fa-user-circle" ></i>&nbsp;登&nbsp;录
+							</a>
+							<a href="#" class="card-link btn btn-outline-success rounded-pill text-success">
+								&nbsp;注&nbsp;册
+							</a>
+						</div>
+						
+					</div>
+						
+					
+					<!--下面是登陆后的页面-->		
+					<!--个人信息展示-->
+					<div class="margin1 d-none login_2">
+						<h5 class="ml-3 my-3 d-none d-sm-block text-lg-center">
+							<b>今天也要记得开心哦</b>&nbsp;&nbsp;<i class="fa fa-coffee"></i>
+						</h5>
+						<div class="ml-3 my-3 d-none d-sm-block text-lg-center d-none">
+							<h5 >登录成功,用户:<p v-text="info">{{info}}</p>
+							</h5>
+
+						</div>
+						
+					</div>
+						
+					<!--登录窗口-->
+					<div class="margin3 d-none login_figure">
+						<div class="row col-6 login-box">
+							<input type="text" placeholder="用户名" v-model="username"><span calss="first"></span>
+							<input type="text" placeholder="密码" v-model="passwd"><span calss="second"></span>
+							<button class="badge-info" @click="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+							<button class="badge-light" id='cancel' >取&nbsp;&nbsp;&nbsp;&nbsp;消</button>
+						</div>
+					</div>
+					
+				</div>
+
+					<!-- 隐藏导航内容,放在id="template2“中，通过d-none默认是隐藏的，使用<ul class="nav">定义导航组件，菜单栏使用h6标签和超链接
+					进行设计，<h6><a href="a.html">-->
+				<div id="template2" class="d-none">
+					<div class="row">
+						<div class="col-10">
+							<!--导航条 -->
+							<ul class="nav">
+								<li class="nav-item">
+									<!--图标 -->
+									<a class="nav-link active" href="index.html">
+										<img width="40" src="../static/images/黄昏航海.jpg" alt="" class="rounded-circle">
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-item mt-2" href="index.html">
+										大数据平台
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="col-2 mt-2 font-menu text-right">
+							<a id="a2" href="javascript:void(0);">
+								<i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="margin2">
+						<div class="ml-5 mt-5">
+							<h6><a href="showBlockchain.html">词云分析</a></h6>
+							<h6><a href="Analysis_words.html">词云分析</a></h6>
+							<h6><a href="">鸢尾花集</a></h6>
+							<h6><a href="">菜单</a></h6>
+							<hr />
+							<h6><a href="">帮助中心</a></h6>
+							<hr />
+							<a href="#" class="card-link btn rounded-pill text-success">
+								<i class="fa fa-user-circle"></i>&nbsp;登&nbsp;录
+							</a>
+							<a href="#" class="card-link btn btn-outline-success rounded-pill text-success">
+								&nbsp;注&nbsp;册
+							</a>
+						</div>
+					</div>
+				</div>
+           </div>
+		   
+		   
+		   
+			<!-- 右侧-->
+		<!-- 	<div class="col-12 col-lg-9 right"> 右侧-->
+			<div class="col-sm-12 col-lg-9 offset-md-3 right p-0 clearfix">
+				<!-- 轮播页，clearfix:清楚浮动，父元素高度塌陷问题。-->
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner max-h">
+						<div class="carousel-item active">
+							<img src="../static/images/黄昏航海.jpg" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img src="../static/images/猫和人.jpg" class="d-block w-100" alt="...">
+						</div>	
+						<div class="carousel-item">
+							<img src="../static/images/火车日落.jpeg" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img src="../static/images/公路.jpg" class="d-block w-100" alt="...">
+						</div>
+					</div> 
+					<a class="carousel-control-prev" href="#carouselExampleControls" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleControls" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
+				</div>
+				<!--推荐功能区-->
+				<div class="p-4" list>
+					<h5 class="text-center my-3">平台功能推荐</h5>
+					<h5 class="text-center mb-4 text-secondary">
+						<small>让创意去飞翔，用数据来落地</small>
+					</h5>
+				</div>
+				<!--多列卡片浮动排版-->
+				<div class="card-columns">
+					<div calss="my-4 my-sm-0">
+						<img class="card-img-top" src="../static/images/2.png" alt="">
+					</div>
+					<div calss="my-4 my-sm-0">
+						<img class="card-img-top" src="../static/images/first.png" alt="">
+					</div>
+					<div calss="my-4 my-sm-0">
+						<img class="card-img-top" src="../static/images/鸢尾花.jpeg" alt="">
+					</div>
+				</div>
+				<!--设计登录注册区和Logo-->
+				<div class="row py-5 login_figure">
+					<div class="col-12 col-sm-6 pt-2">
+						<div class="card border-0 text-center text-sm-left">
+							<div class="card-body ml-5">
+								<h4 class="card-title"> 大数据平台</h4>
+								<p class="card-text">智汇商业大数据，市场决策无忧虑。</p>
+								<a href="#" class="card-link btn btn-outline-success">注册</a>
+								<a href="#" class="card-link btn btn-outline-success">登录</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 text-center mt-5">
+						<a href=""><img src="../static/images/20210712100839551.jpeg" alt="" class="img-fluid log"></a>
+					</div>
+				</div>
+				<!--设计案例展示区-->
+				<div class="p-4 list">
+					<h5 class="text-center my-3">示例展示</h5>
+					<h5 class="text-center mb-4 text-secondary">
+						<small>数据挖掘平台功能示例，帮助您更好使用该平台</small>
+					</h5>
+				 
+					<div class="row">
+						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
+							<div class="bg-light p-4 list-border rounded">
+								<!-- Analysis_words.html-->
+								<a href="http://127.0.0.1:5000/analysis"><img class="img-fluid" src="../static/images/first.png" alt=""></a>
+								<h6 class="text-center text-secondary mt-3">词云分析</h6>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
+							<div class="bg-white p-4 list-border rounded">
+								<img class="img-fluid" src="../static/images/鸢尾花.jpeg" alt="">
+								<h6 class="text-center text-secondary mt-3">鸢尾花数据分析</h6>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
+							<div class="bg-light p-4 list-border rounded">
+								<img class="img-fluid" src="../static/images/2.png" alt="">
+								<h6 class="text-center text-secondary mt-3">逻辑回归预测</h6>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
+							<div class="bg-light p-4 list-border rounded">
+								<img class="img-fluid" src="../static/images/2.png" alt="">
+								<h6 class="text-center text-secondary mt-3">k均值聚类</h6>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--流程-->
+			</div><!-- 右侧结束-->
+				
+		</div>
+		<!-- 隐藏导航栏-->
+		<!--row fixed-bottom d-block d-sm-none bg-light border-top py-1-->
+		<div class="row fixed-bottom d-block d-sm-none bg-light border-top py-1" id="footer">
+			<ul class=" clearfix text-center p-0" id="myTab">
+				<li>
+					<a class="ab" href="http://127.0.0.1:5000">
+						<i class="fa fa-home fa-2x p-1"><br/>主页</i>
+					</a>
+				</li>
+				
+				<li>
+					<a href="javascript:void(0);">
+						<i class="fa fa-user-circle-o fa-2x p-1"><br/>用户信息</i>
+					</a>
+				</li>
+				
+				<li>
+					<a href="javascript:void(0);">
+						<i class="fa fa-bitbucket-square fa-2x p-1"><br/>菜单</i>
+					</a>
+				</li>
+				
+				<li>
+					<a href="javascript:void(0);">
+						<i class="fa fa-table fa-2x p-1"><br/>更多</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../static/js/index.js"></script>
+	</body>
+</html>

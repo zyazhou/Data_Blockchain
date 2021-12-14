@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>展示物联网设备的区块链数据</title>
+    <link rel="stylesheet" href="../static/bootstrap-4.2.1-dist/css/bootstrap.css">
+    <!--引入bootstrap基本样式-->
+
+    <script src="../static/js/jquery-3.3.1.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
+    <script src="../static/js/vue.js"></script>
+    <script src="../static/js/axios.min.js"></script>
+
+    <!--引入自定义样式-->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.css">
+
+</head>
+<body>
+    <div id="app2">
+		<input type="button" value="查看所有数据" @click="show">
+        <ui>
+            <li v-for="item in items" v-bind:title="item.index">
+                {{item.index}}
+            </li>
+
+        </ui>
+    </div>
+    <script src="../static/js/index.js"></script>
+</body>
+</html>
