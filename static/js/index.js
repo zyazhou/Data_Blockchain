@@ -65,29 +65,37 @@ var app1=new Vue({
 				console.log('no')
 				})
 		},
-	
+
+
+		showmore:function(){
+			const  that=this;
+			var i=0;
+			var uername="";
+			var password="";
+			var money=0;
+			var phone=0;
+			var email=0;
+			var params = new URLSearchParams();
+			var dic = new Array();
+			var lbt = "";
+			params.append('username', this.username);
+			axios.post("http://127.0.0.1:5000/showmore",params)
+			.then(function(response){
+				uername=response.data['username'];
+				money=response.data['money'];
+				phone=response.data['phone'];
+				email=response.data['email'];
+				console.log(uername)
+				lbt += '<li><p>用户名：:'+uername+ ' </h6></li><li><h6>账户余额:'+money+' </h6></li><li><h6>手机号:'+phone+'</h6></li><li><h6>电子邮箱:'+email+'</h6></li>';
+				$("#ul_class").removeClass("d-none");
+				$("#ul_list1").empty();
+				$("#ul_list1").append(lbt);
+				console.log("ok")
+			},function(err){
+
+				console.log('no')
+				})
+		},
 	},
 	
 })
-
-	    var app=new Vue({
-	    el:"#app2",
-		data:{
-			items:[]
-		},
-		methods:{
-			show:function(){
-				axios.post("http://127.0.0.1:5000/search_blockchain")
-				.then(function(response){
-						console.log(response.data)	;
-						alert('yes');
-						this.items.shift();
-						console.log("ok");
-					},function(err){
-						alert('error');
-						console.log('no');
-						})
-				},
-			}
-		}
-	    })

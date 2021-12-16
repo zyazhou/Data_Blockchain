@@ -58,7 +58,7 @@ def world_cloud(key):
     fname_text=fname_text+key+'.txt'
     #fname_text = './files/scrapy_files/lagou.txt'
 
-    fname_stop = './static/cn_stopwords.txt'
+    fname_stop = './static/cn_stopwords.txt' #导入的文件路径，词云中文停止符
 
     fname_mask = './static/images/公路.jpg'
         #'./static/images/词云.png'
@@ -95,6 +95,6 @@ def world_cloud(key):
     ax = plt_imshow(wcd, )
     images_path='./static/images/scrapy_files/'
     images_path=images_path+key+'.png'
-    ax.figure.savefig(images_path, bbox_inches='tight', dpi=150)
+    ax.figure.savefig(images_path, bbox_inches='tight', dpi=150) #词云分析图
 
 

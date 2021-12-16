@@ -6,19 +6,22 @@ from datetime import datetime
 from scrapy import Lagou
 import os ,json
 from venv import data_config
+from werkzeug.utils import secure_filename
+from datetime import timedelta
 
 app = Flask(__name__) #数据库配置
 app.config.from_object(data_config)
 db=SQLAlchemy(app)
+#定义用户表
 #定义用户表
 class User(db.Model):
     __tablename__ = 'login_user'
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
     username=db.Column(db.String(50),nullable=False)#用户名
     password=db.Column(db.String(50),nullable=False)#密码
+    money= db.Column(db.Integer, autoincrement=True)  # 余额
     phone=db.Column(db.String(11),nullable=True)#电话
     email=db.Column(db.String(30),nullable=False)#邮箱
-    reg_time=db.Column(db.DateTime,default=datetime.now)#注册时间
 
 class Blockchain(db.Model,):
     __tablename__ = 'blockchain'
@@ -54,36 +57,54 @@ def display_img(filename):
     else:
         pass
 
+@app.route('/showmore',methods=['POST','GET'])
+def showmore():
+    username = request.values.get('username')
+    user = User.query.filter(User.username == username).first()
+    data={
+        'username':username,
+        'money': user.money,
+        'email': user.email,
+        'phone': user.phone,
+    }
+    return jsonify(data), 200
+
 @app.route('/user_login',methods=['POST','GET'])
 def user_login():
     username = request.values.get('username')
     passwd=request.values.get('passwd')
-    try:
-        #user = User.query.filter(User.username == username).first()
-        user = User.query.filter(User.username ==username).first()
+    print(username)
+    print(passwd)
 
-        if(user.password ==passwd):
+    user = User.query.filter(User.username ==username).first()
+    print('00000')
+    if(user.password ==passwd):
             data={
                 'username':username,
                 'passwd':passwd
             }
+            print('00001')
             resp = make_response("suess")
             resp.set_cookie("username", username, max_age=3600)
-            resp.set_cookie("passwd", 'passwd', max_age=3600)
+            resp.set_cookie("passwd", passwd, max_age=3600)
             #sendToNodes('127.0.0.1','/set_cookie',data)
             return resp,200
         #print(user.username)
-    except Exception as e:
+    else:
         response = {
             'result':'no',
             'message': 'fail',
         }
-        return jsonify(response),404
+        return jsonify(response),400
+@app.route('/show_blockchain',methods=['POST','GET'])
+def show_blockchain():
+    return render_template('showBlockchain.html')
+
 
 @app.route('/search_blockchain',methods=['POST','GET'])
 def search_blockchain():
     items=[]
-    for i  in (0,4):
+    for i  in range (0,4):
         t = Blockchain.query.filter(Blockchain.index == i).first()
         tem={}
         tem['index']=t.index
@@ -91,9 +112,7 @@ def search_blockchain():
         tem['message'] = t.message
         tem['pre_hash'] = t.pre_hash
         items.append(tem)
-        print(tem)
         tem={}
-        print(items)
     return jsonify(items),200
 
 @app.route('/analysis',methods=['POST','GET'])
@@ -127,11 +146,33 @@ def analysis_words(keyword):
 
     return '200'
 
+# 设置允许的文件格式
+ALLOWED_EXTENSIONS = set(['txt', 'jpg', 'JPG', 'PNG', 'bmp'])
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+# 设置静态文件缓存过期时间
+app.send_file_max_age_default = timedelta(seconds=1)
 #实现上传文件接口
 @app.route('/uploadfile',methods=['POST,"GET'])
 def uploadfile():
 
-    return 0
+
+        # 通过file标签获取文件
+        f = request.files['file']
+        if not (f and allowed_file(f.filename)):
+            return jsonify({"error": 1001, "msg": "图片类型：png、PNG、jpg、JPG、bmp"})
+        # 当前文件所在路径
+        basepath = os.path.dirname(__file__)
+        # 一定要先创建该文件夹，不然会提示没有该路径
+        upload_path = os.path.join(basepath, 'static/upload', secure_filename(f.filename))
+        # 保存文件
+        f.save(upload_path)
+        # 返回上传成功界面
+        return '200'
+    # 重新返回上传界面
+
+
+
 
 #找到响应的文件并进行处理,返回文件名
 @app.route('/datasfile_require',methods=['POST','GET'])

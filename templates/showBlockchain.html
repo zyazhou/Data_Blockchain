@@ -12,21 +12,19 @@
     <script src="../static/js/vue.js"></script>
     <script src="../static/js/axios.min.js"></script>
 
+    <script src="../static/js/show_blockchain.js"></script>
     <!--引入自定义样式-->
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.css">
 
 </head>
 <body>
-    <div id="app2">
-		<input type="button" value="查看所有数据" @click="show">
-        <ui>
-            <li v-for="item in items" v-bind:title="item.index">
-                {{item.index}}
-            </li>
 
-        </ui>
+    <div id="app2">
+        <button class="badge-info" @click="show()">查看所有数据</button>
+		<ul class="tabcon caritem" id="ul_list"></ul>
     </div>
-    <script src="../static/js/index.js"></script>
+
+<script src="../static/js/show_blockchain.js"></script>
 </body>
 </html>

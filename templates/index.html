@@ -44,7 +44,7 @@
 								</li>
 								
 								<li class="nav-item mt-1">
-									<a class="nav-link" href="javascript:void(0);">个人信息</a>
+									<a class="nav-link" href="javascript:void(0);" @click="showmore()">个人信息</a>
 								</li>
 								<li class="nav-item mt-1">
 									<a class="nav-link" href="javascript:void(0);">菜单</a>
@@ -55,6 +55,10 @@
 						<div class="col-2 mt-2 font-menu text-right">
 							<a id="a1" href="javascript:void(0);"> <i class="fa fa-bars"></i> </a>
 						</div>
+					</div>
+					
+					<div class="ml-3 my-3 d-none d-sm-block text-lg-center d-none" id="ul_class">
+						<ul class="tabcon caritem" id="ul_list1"></ul>
 					</div>
 					
 					<!--下面是未登录页面-->
@@ -129,7 +133,7 @@
 					</div>
 					<div class="margin2">
 						<div class="ml-5 mt-5">
-							<h6><a href="showBlockchain.html">词云分析</a></h6>
+							<h6><a href="http://127.0.0.1:5000/show_blockchain">展示区块链数据</a></h6>
 							<h6><a href="Analysis_words.html">词云分析</a></h6>
 							<h6><a href="">鸢尾花集</a></h6>
 							<h6><a href="">菜单</a></h6>
@@ -156,16 +160,16 @@
 				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner max-h">
 						<div class="carousel-item active">
-							<img src="../static/images/黄昏航海.jpg" class="d-block w-100" alt="...">
+							<img src="../static/images/主题1.jpg" class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item">
-							<img src="../static/images/猫和人.jpg" class="d-block w-100" alt="...">
+							<img src="../static/images/主题2.jpg" class="d-block w-100" alt="...">
 						</div>	
 						<div class="carousel-item">
-							<img src="../static/images/火车日落.jpeg" class="d-block w-100" alt="...">
+							<img src="../static/images/主题3.jpg" class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item">
-							<img src="../static/images/公路.jpg" class="d-block w-100" alt="...">
+							<img src="../static/images/主题4.jpg" class="d-block w-100" alt="...">
 						</div>
 					</div> 
 					<a class="carousel-control-prev" href="#carouselExampleControls" data-slide="prev">
@@ -185,13 +189,13 @@
 				<!--多列卡片浮动排版-->
 				<div class="card-columns">
 					<div calss="my-4 my-sm-0">
-						<img class="card-img-top" src="../static/images/2.png" alt="">
+						<img class="card-img-top" src="../static/images/浮动01.jpg" alt="">
 					</div>
 					<div calss="my-4 my-sm-0">
-						<img class="card-img-top" src="../static/images/first.png" alt="">
+						<img class="card-img-top" src="../static/images/浮动02.jpg" alt="">
 					</div>
 					<div calss="my-4 my-sm-0">
-						<img class="card-img-top" src="../static/images/鸢尾花.jpeg" alt="">
+						<img class="card-img-top" src="../static/images/浮动03.jpg" alt="">
 					</div>
 				</div>
 				<!--设计登录注册区和Logo-->
@@ -221,7 +225,7 @@
 						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
 							<div class="bg-light p-4 list-border rounded">
 								<!-- Analysis_words.html-->
-								<a href="http://127.0.0.1:5000/analysis"><img class="img-fluid" src="../static/images/first.png" alt=""></a>
+								<a href="http://127.0.0.1:5000/analysis"><img class="img-fluid" src="../static/images/CiYunFenXi.png" alt=""></a>
 								<h6 class="text-center text-secondary mt-3">词云分析</h6>
 							</div>
 						</div>
@@ -233,13 +237,13 @@
 						</div>
 						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
 							<div class="bg-light p-4 list-border rounded">
-								<img class="img-fluid" src="../static/images/2.png" alt="">
+								<img class="img-fluid" src="../static/images/LuoJiHuiGuiYuCe.png" alt="">
 								<h6 class="text-center text-secondary mt-3">逻辑回归预测</h6>
 							</div>
 						</div>
 						<div class="col-12 col-sm-6 col-md-3 mb-3 mb-md-0">
 							<div class="bg-light p-4 list-border rounded">
-								<img class="img-fluid" src="../static/images/2.png" alt="">
+								<img class="img-fluid" src="../static/images/KJunZhiJuLei.png" alt="">
 								<h6 class="text-center text-secondary mt-3">k均值聚类</h6>
 							</div>
 						</div>

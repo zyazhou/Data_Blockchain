@@ -18,6 +18,7 @@ class User(db.Model):
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
     username=db.Column(db.String(50),nullable=False)#用户名
     password=db.Column(db.String(50),nullable=False)#密码
+    money= db.Column(db.Integer, autoincrement=True)  # 余额
     phone=db.Column(db.String(11),nullable=True)#电话
     email=db.Column(db.String(30),nullable=False)#邮箱
 
@@ -55,8 +56,11 @@ db.create_all()
 @app.route('/add')
 def add():
     #添加两条用户数据
-    user1 = User(username="zya", password="123456", phone="18079690671", email="2534719204@qq.com")
+    user1 = User(id=1,username="zya", password="123456", money=100,phone="18079690671", email="2534719204@qq.com")
+
+    user2 = User(id=2,username="123", password="123456", money=100, phone="11111111111", email="1111111111@qq.com")
     db.session.add(user1)
+    db.session.add(user2)
     db.session.commit()
     return '添加数据成功！'
 
@@ -120,9 +124,8 @@ def blockchain_updata():
 def select():
     try:
         user = User.query.filter(User.username == 'zya').first()
-
-
-        print(user.username)
+        if(user.password=='123456'):
+            print(user.username)
 
         return "查询数据成功！"
 
